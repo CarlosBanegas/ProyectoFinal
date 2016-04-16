@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -23,48 +26,69 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+
+
+
+    }
+
+    public void clickCancelar(View v){
         final EditText etAge = (EditText) findViewById(R.id.etAge);
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
-        final Button bRegister = (Button) findViewById(R.id.bRegister);
+        etAge.setText("");
+        etName.setText("");
+        etUsername.setText("");
+        etPassword.setText("");
+        etName.requestFocus();
+    }
 
-        bRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String name = etName.getText().toString();
-                final String username = etUsername.getText().toString();
-                final int age = Integer.parseInt(etAge.getText().toString());
-                final String password = etPassword.getText().toString();
+    public void clickRegisterUser(View v) {
+        final EditText etAge = (EditText) findViewById(R.id.etAge);
+        final EditText etName = (EditText) findViewById(R.id.etName);
+        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
+        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
 
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if (success) {
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                RegisterActivity.this.startActivity(intent);
-                                Toast.makeText(getApplicationContext(), "Registro Satisfactorio", Toast.LENGTH_SHORT).show();
-                                finish();
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                builder.setMessage("Registro Fallido")
-                                        .setNegativeButton("Reintentar", null)
-                                        .create()
-                                        .show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+        if ((TextUtils.isEmpty(etAge.getText())) || (TextUtils.isEmpty(etName.getText())) || (TextUtils.isEmpty(etUsername.getText())) || (TextUtils.isEmpty(etPassword.getText()))) {
+            etAge.setError("Campo Obligatorio");
+            etName.setError("Campo Obligatorio");
+            etUsername.setError("Campo Obligatorio");
+            etPassword.setError("Campo Obligatorio");
+            Toast.makeText(getApplicationContext(), "Debe llenar los campos obligatorios", Toast.LENGTH_SHORT).show();
+        } else {
+
+            final String name = etName.getText().toString();
+            final String username = etUsername.getText().toString();
+            final int age = Integer.parseInt(etAge.getText().toString());
+            final String password = etPassword.getText().toString();
+
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.getBoolean("success");
+                        if (success) {
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            RegisterActivity.this.startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Registro Satisfactorio", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setMessage("Registro Fallido")
+                                    .setNegativeButton("Reintentar", null)
+                                    .create()
+                                    .show();
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                };
+                }
+            };
 
-                RegisterRequest registerRequest = new RegisterRequest(name, username, age, password, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                queue.add(registerRequest);
-            }
-        });
+            RegisterRequest registerRequest = new RegisterRequest(name, username, age, password, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+            queue.add(registerRequest);
+        }
     }
 }

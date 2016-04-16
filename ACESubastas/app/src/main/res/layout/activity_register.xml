@@ -41,14 +41,6 @@
         android:layout_alignParentEnd="true"
         android:hint="Contraseña" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrar"
-        android:id="@+id/bRegister"
-        android:layout_below="@+id/etAge"
-        android:layout_centerHorizontal="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,4 +53,31 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:hint="Edad" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etAge"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrar"
+            android:id="@+id/bRegister"
+            android:layout_below="@+id/etAge"
+            android:layout_centerHorizontal="true"
+            android:onClick="clickRegisterUser" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:id="@+id/button"
+            android:layout_below="@+id/etAge"
+            android:layout_toRightOf="@+id/bRegister"
+            android:layout_toEndOf="@+id/bRegister"
+            android:onClick="clickCancelar" />
+    </LinearLayout>
 </RelativeLayout>

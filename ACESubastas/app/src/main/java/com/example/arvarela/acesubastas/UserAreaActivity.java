@@ -16,26 +16,6 @@ public class UserAreaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_area);
 
 
-        final Button bNuevaPublicacion=(Button) findViewById(R.id.bNuevaPublicacion);
-        final Button bVerSaubastas=(Button) findViewById(R.id.bVerSaubastas);
-
-   /*     bNuevaPublicacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerIntent = new Intent(UserAreaActivity.this, RgisterCarActivity.class);
-                UserAreaActivity.this.startActivity(registerIntent);
-            }
-        });
-*/
-        bVerSaubastas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserAreaActivity.this, ListCar.class);
-                UserAreaActivity.this.startActivity(intent);
-            }
-        });
-
-
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         String username = intent.getStringExtra("username");
@@ -45,11 +25,21 @@ public class UserAreaActivity extends AppCompatActivity {
         EditText etUsername = (EditText) findViewById(R.id.etUsername);
         EditText etAge = (EditText) findViewById(R.id.etAge);
 
-        // Display user details
+        // Mostrar detalles
         String message = name + " Binvenido a la pantalla detalle";
         tvWelcomeMsg.setText(message);
         etUsername.setText(username);
         etAge.setText(age + "");
+    }
+
+    public void clickRegisterCar(View v){
+        Intent registerIntent = new Intent(UserAreaActivity.this, RgisterCarActivity.class);
+        UserAreaActivity.this.startActivity(registerIntent);
+    }
+
+    public void clickVerSubastas(View v){
+        Intent intent=new Intent(this, ListCar.class);
+        startActivity(intent);
     }
 
 

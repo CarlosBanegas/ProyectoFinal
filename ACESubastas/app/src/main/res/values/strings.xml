@@ -4,4 +4,12 @@
     <string name="title_activity_menu_principal">MenuPrincipal</string>
     <string name="title_activity_buscar_vehiculo">BuscarVehiculo</string>
     <string name="title_activity_subasta">Subasta</string>
+    
+    <string-array name="tipoVehiculos">
+        <item>Turismo</item>
+        <item>Camioneta</item>
+        <item>Pick-Up</item>
+        <item>Busito</item>
+        <item>Otro</item>
+    </string-array>
 </resources>
