@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                 intent.putExtra("age", age);
                                 intent.putExtra("username", username);
                                 LoginActivity.this.startActivity(intent);
+                                finish();
 
                                 Toast.makeText(getApplicationContext(), "Bienvenido " + name, Toast.LENGTH_SHORT).show();
                             } else {
