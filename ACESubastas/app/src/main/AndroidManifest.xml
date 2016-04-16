@@ -19,7 +19,19 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".UserAreaActivity" />
-        <activity android:name=".RgisterCarActivity"></activity>
+        <activity android:name=".RgisterCarActivity" />
+        <activity
+            android:name=".MenuPrincipal"
+            android:label="@string/title_activity_menu_principal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BuscarVehiculo"
+            android:label="@string/title_activity_buscar_vehiculo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Subasta"
+            android:label="@string/title_activity_subasta"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

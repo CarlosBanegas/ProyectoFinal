@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ACE Subastas</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="title_activity_buscar_vehiculo">BuscarVehiculo</string>
+    <string name="title_activity_subasta">Subasta</string>
 </resources>
