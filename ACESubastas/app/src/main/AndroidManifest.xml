@@ -31,7 +31,9 @@
         <activity
             android:name=".Subasta"
             android:label="@string/title_activity_subasta"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ListCar" />
+        <activity android:name=".DetalleCar"></activity>
     </application>
 
 </manifest>

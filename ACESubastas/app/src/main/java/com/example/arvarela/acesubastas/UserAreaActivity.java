@@ -17,6 +17,7 @@ public class UserAreaActivity extends AppCompatActivity {
 
 
         final Button bNuevaPublicacion=(Button) findViewById(R.id.bNuevaPublicacion);
+        final Button bVerSaubastas=(Button) findViewById(R.id.bVerSaubastas);
 
    /*     bNuevaPublicacion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,7 +27,13 @@ public class UserAreaActivity extends AppCompatActivity {
             }
         });
 */
-
+        bVerSaubastas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserAreaActivity.this, ListCar.class);
+                UserAreaActivity.this.startActivity(intent);
+            }
+        });
 
 
         Intent intent = getIntent();
