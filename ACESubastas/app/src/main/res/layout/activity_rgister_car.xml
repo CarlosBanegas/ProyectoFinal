@@ -9,54 +9,118 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/etMarca"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:hint="Marca" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/etModelo"
-            android:hint="Modelo"
-            android:layout_below="@+id/etMarca"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/etMarca"
-            android:layout_alignEnd="@+id/etMarca" />
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/etModelo"
+                android:hint="Modelo"
+                android:layout_below="@+id/etMarca"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/etMarca"
+                android:layout_alignEnd="@+id/etMarca" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/etColor"
-            android:hint="Color"
-            android:layout_below="@+id/etModelo"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/etModelo"
-            android:layout_alignEnd="@+id/etModelo" />
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/etColor"
+                android:hint="Color"
+                android:layout_below="@+id/etModelo"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/etModelo"
+                android:layout_alignEnd="@+id/etModelo"
+                android:layout_weight="0.62" />
 
-        <EditText
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/etAno"
-            android:hint="Año"
-            android:inputType="number"
-            android:layout_above="@+id/etTipo"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/etModelo"
-            android:layout_alignEnd="@+id/etModelo" />
+            android:weightSum="1">
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/etMarca"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Marca"
+                android:layout_weight="0.64" />
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/etAno"
+                android:hint="Año"
+                android:inputType="number"
+                android:layout_above="@+id/etTipo"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/etModelo"
+                android:layout_alignEnd="@+id/etModelo" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/etPrecioInicial"
+                android:layout_below="@+id/etDescripcion"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Precio Inicial" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/fotocarro"
+                android:background="@color/accent_material_dark" />
+
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="146dp">
+
+                <Button
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:text="Foto"
+                    android:id="@+id/bfoto"
+                    android:onClick="bfoto"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+        </LinearLayout>
 
         <Spinner
             android:layout_width="match_parent"
@@ -74,18 +138,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:id="@+id/etFoto"
-            android:hint="Foto"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/etModelo"
-            android:layout_alignEnd="@+id/etModelo" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
             android:id="@+id/etDescripcion"
             android:hint="Descripcion"
             android:layout_below="@+id/etFoto"
@@ -93,19 +145,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/etModelo"
             android:layout_alignEnd="@+id/etModelo" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/etPrecioInicial"
-            android:layout_below="@+id/etDescripcion"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:hint="Precio Inicial" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -148,6 +187,7 @@
             android:layout_alignRight="@+id/etModelo"
             android:layout_alignEnd="@+id/etModelo"
             android:visibility="invisible" />
+
     </LinearLayout>
 
 </RelativeLayout>

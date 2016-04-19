@@ -1,6 +1,14 @@
 package com.example.arvarela.acesubastas;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,14 +28,26 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class RgisterCarActivity extends AppCompatActivity {
+    private String app_directory="myPictureApp/";
+    private String media_directory=app_directory+"media";
+    private String temporal_picture_name="temporal.jpg";
+
+    private final int foto_codigo=100;
+    private final int selecccionar_foto=200;
+    private ImageView imageview;
+
+    private Context context=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rgister_car);
+
+        imageview =(ImageView)findViewById(R.id.fotocarro);
 
         ArrayList<String> list = new ArrayList<String>();
         list.add("Turismo");
@@ -81,11 +102,70 @@ public class RgisterCarActivity extends AppCompatActivity {
         });
     }
 
+    public void bfoto(View view){
+        final CharSequence[] options={"Tomar Foto","Elegir de Galeria","Cancelar"};
+        final AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setTitle("Elige una opcion :D");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int seleccion) {
+                if (options[seleccion]=="Tomar Foto"){
+                    openCamera();
+
+                }else if (options[seleccion]=="Elegir de Galeria"){
+                    Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(intent.createChooser(intent,"Selecciona app de imagen"),selecccionar_foto);
+
+                }else if(options[seleccion]=="Cancelar"){
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
 
 
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case foto_codigo:
+                if(resultCode==RESULT_OK){
+                    String dir=Environment.getExternalStorageDirectory()+File.separator
+                            + media_directory+File.separator+temporal_picture_name;
+                    decodeBitmap(dir);
+                }
+                break;
+            case selecccionar_foto:
+                if(resultCode==RESULT_OK){
+                    Uri path=data.getData();
+                    imageview.setImageURI(path);
+                }
 
+        }
+    }
 
+    private void decodeBitmap(String dir) {
+        Bitmap bitmap;
+        bitmap= BitmapFactory.decodeFile(dir);
+        imageview.setImageBitmap(bitmap);
+
+    }
+
+    private void openCamera() {
+        File file=new File(Environment.getExternalStorageDirectory(), media_directory);
+        file.mkdirs();
+        String path=Environment.getExternalStorageDirectory()+File.separator+
+                media_directory+File.separator+temporal_picture_name;
+        File newfile=new File(path);
+
+        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newfile));
+        startActivityForResult(intent,foto_codigo);
+
+    }
 
 
     public void clickCancelar(View v){
