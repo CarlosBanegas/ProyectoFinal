@@ -81,13 +81,15 @@ public class Subasta extends AppCompatActivity {
             TextView millaje = (TextView) findViewById(R.id.textViewMillajeSubasta);
             TextView año = (TextView) findViewById(R.id.textViewAñoSubasta);
             TextView precio = (TextView) findViewById(R.id.textViewPrecioInicialSubasta);
+            TextView valorAcumulado = (TextView) findViewById(R.id.textViewValorAcumulado);
             NetworkImageView imagen = (NetworkImageView) findViewById(R.id.view2);
 
             marca.setText(jobj.get("marca").toString());
             modelo.setText(jobj.get("modelo").toString());
             millaje.setText(jobj.get("millaje").toString());
-            año.setText(jobj.get("año").toString());
+            año.setText(jobj.get("ano").toString());
             precio.setText(jobj.get("precioInicial").toString());
+            valorAcumulado.setText(jobj.get("precioInicial").toString());
 
 
             imagen.setImageUrl(String.valueOf(jobj.getString("foto")), VolleySingletonActivity.getInstance().getImageLoader());
