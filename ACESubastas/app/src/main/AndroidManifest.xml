@@ -24,10 +24,7 @@
         <activity android:name=".RgisterCarActivity" />
         <activity android:name=".ListCar" />
         <activity android:name=".DetalleCar" />
-        <activity
-            android:name=".Subasta"
-            android:label="@string/title_activity_subasta"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Subasta"></activity>
     </application>
 
 </manifest>
