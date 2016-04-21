@@ -31,7 +31,7 @@ public class DetalleCar extends AppCompatActivity {
             tvPrecio.setText(jobj.get("precioInicial").toString());
             tvDetalle.setText(jobj.get("descripcion").toString());
 
-
+            imagen.setImageUrl(String.valueOf(jobj.getString("foto")), VolleySingletonActivity.getInstance().getImageLoader());
            /* String UrlImagen = String.format("http://www.kiva.org/img/120/%d.jpg",
                     jobj.getJSONObject("image").getInt("id"));
 

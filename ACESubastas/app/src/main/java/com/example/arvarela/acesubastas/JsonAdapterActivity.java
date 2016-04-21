@@ -37,7 +37,7 @@ public class JsonAdapterActivity extends ArrayAdapter<JSONObject> {
                 titulo.setText(p.get("marca").toString());
                 subtitulo.setText(p.get("modelo").toString());
 
-
+                imagen.setImageUrl(String.valueOf(p.getString("foto")), VolleySingletonActivity.getInstance().getImageLoader());
                 //IMAGEN
 
               /*  String UrlImagen = String.format("http://www.kiva.org/img/120/%d.jpg"

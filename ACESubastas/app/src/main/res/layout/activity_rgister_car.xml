@@ -18,13 +18,14 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/etModelo"
-                android:hint="Modelo"
-                android:layout_below="@+id/etMarca"
+                android:id="@+id/etMarca"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignRight="@+id/etMarca"
-                android:layout_alignEnd="@+id/etMarca" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Marca"
+                android:layout_weight="0.64" />
 
             <EditText
                 android:layout_width="150dp"
@@ -51,14 +52,13 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/etMarca"
-                android:layout_alignParentTop="true"
+                android:id="@+id/etModelo"
+                android:hint="Modelo"
+                android:layout_below="@+id/etMarca"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:hint="Marca"
-                android:layout_weight="0.64" />
+                android:layout_alignRight="@+id/etMarca"
+                android:layout_alignEnd="@+id/etMarca" />
 
             <EditText
                 android:layout_width="150dp"
@@ -94,6 +94,18 @@
                 android:hint="Precio Inicial" />
         </LinearLayout>
 
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerTipoVehiculo"
+            android:layout_alignLeft="@+id/linearLayout"
+            android:layout_alignStart="@+id/linearLayout"
+            android:spinnerMode="dialog"
+            android:layout_below="@+id/linearLayout"
+            android:layout_alignParentBottom="true"
+            android:nestedScrollingEnabled="false"
+            />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -120,21 +132,15 @@
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:enabled="false" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etFoto"
+                    android:hint="Foto" />
             </RelativeLayout>
 
         </LinearLayout>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinnerTipoVehiculo"
-            android:layout_alignLeft="@+id/linearLayout"
-            android:layout_alignStart="@+id/linearLayout"
-            android:spinnerMode="dialog"
-            android:layout_below="@+id/linearLayout"
-            android:layout_alignParentBottom="true"
-            android:nestedScrollingEnabled="false"
-            />
 
         <EditText
             android:layout_width="match_parent"
