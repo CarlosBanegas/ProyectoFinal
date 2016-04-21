@@ -7,6 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.concurrent.TimeUnit;
 
 public class Subasta extends AppCompatActivity {
@@ -18,9 +23,8 @@ public class Subasta extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subasta);
-
+        consulta(); //Funcion para conlsutar la informacion del auto a subastar
         buttonOfertar=(Button) findViewById(R.id.buttonOfertarSubasta);
-
         textView=(TextView) findViewById(R.id.textViewCronometroSubasta);
         textView.setText("00:00:10");
 
@@ -45,7 +49,7 @@ public class Subasta extends AppCompatActivity {
         resultado = aux2 + aux3;
         et3.setText(String.valueOf(resultado));
 
-    }
+    } //Funcion para ofertar por el vehiculo
 
     public class CounterClass extends CountDownTimer {
 
@@ -66,5 +70,34 @@ public class Subasta extends AppCompatActivity {
             textView.setText("Has Ganado la Subasta en: "+resultado);
             buttonOfertar.setEnabled(false);
         }
-    }
+    } //Funcion para el cronometro
+
+    public void consulta(){
+        try{
+            JSONObject jobj = new JSONObject((getIntent().getExtras().getString("jsonObj")));
+            //JSONObject jobj = new JSONObject(getIntent().getExtras().getString("JsonObj"));
+            TextView marca = (TextView) findViewById(R.id.textViewMarcaSubasta);
+            TextView modelo = (TextView) findViewById(R.id.textViewModeloSubasta);
+            TextView millaje = (TextView) findViewById(R.id.textViewMillajeSubasta);
+            TextView año = (TextView) findViewById(R.id.textViewAñoSubasta);
+            TextView precio = (TextView) findViewById(R.id.textViewPrecioInicialSubasta);
+            NetworkImageView imagen = (NetworkImageView) findViewById(R.id.view2);
+
+            marca.setText(jobj.get("marca").toString());
+            modelo.setText(jobj.get("modelo").toString());
+            millaje.setText(jobj.get("millaje").toString());
+            año.setText(jobj.get("año").toString());
+            precio.setText(jobj.get("precioInicial").toString());
+
+
+            imagen.setImageUrl(String.valueOf(jobj.getString("foto")), VolleySingletonActivity.getInstance().getImageLoader());
+           /* String UrlImagen = String.format("http://www.kiva.org/img/120/%d.jpg",
+                    jobj.getJSONObject("image").getInt("id"));
+
+            imagen.setImageUrl(UrlImagen,VolleySingletonActivity.getInstance().getImageLoader());
+            */
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+    } //Funcion para consultar la informacion del vehiculo a subastar
 }
