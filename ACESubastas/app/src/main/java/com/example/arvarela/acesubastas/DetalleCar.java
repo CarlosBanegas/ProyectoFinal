@@ -1,7 +1,9 @@
 package com.example.arvarela.acesubastas;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -40,6 +42,11 @@ public class DetalleCar extends AppCompatActivity {
         } catch (JSONException e){
             e.printStackTrace();
         }
+    }
+
+    public void Entrar(View v){
+        Intent intent=new Intent(this, Subasta.class);
+        startActivity(intent);
     }
 
 }

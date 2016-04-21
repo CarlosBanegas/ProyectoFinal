@@ -36,7 +36,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="339dp"
             android:weightSum="1">
 
             <com.android.volley.toolbox.NetworkImageView
@@ -76,6 +76,19 @@
                 android:text="Ninguna Descripcion"
                 android:id="@+id/tvDetalle"
                 android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Entrar a la Subasta"
+                android:id="@+id/buttonEntrar"
+                android:onClick="Entrar" />
         </LinearLayout>
     </LinearLayout>
 
