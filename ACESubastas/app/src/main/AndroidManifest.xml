@@ -3,8 +3,8 @@
     package="com.example.arvarela.acesubastas">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +23,11 @@
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".RgisterCarActivity" />
         <activity android:name=".ListCar" />
-        <activity android:name=".DetalleCar"></activity>
+        <activity android:name=".DetalleCar" />
+        <activity
+            android:name=".Subasta"
+            android:label="@string/title_activity_subasta"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
