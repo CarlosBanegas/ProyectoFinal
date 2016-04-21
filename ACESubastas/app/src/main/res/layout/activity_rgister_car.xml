@@ -104,7 +104,8 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:id="@+id/fotocarro"
-                android:background="@color/accent_material_dark" />
+                android:background="@color/accent_material_dark"
+                android:onClick="bfoto" />
 
             <RelativeLayout
                 android:layout_width="150dp"
@@ -117,7 +118,8 @@
                     android:id="@+id/bfoto"
                     android:onClick="bfoto"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:enabled="false" />
             </RelativeLayout>
 
         </LinearLayout>

@@ -35,6 +35,7 @@ public class RgisterCarActivity extends AppCompatActivity {
     private String app_directory="myPictureApp/";
     private String media_directory=app_directory+"media";
     private String temporal_picture_name="temporal.jpg";
+    int RESULT_LOAD_IMAGE=9002;
 
     private final int foto_codigo=100;
     private final int selecccionar_foto=200;
@@ -103,6 +104,14 @@ public class RgisterCarActivity extends AppCompatActivity {
     }
 
     public void bfoto(View view){
+        ImageView fotoCarro=(ImageView)findViewById(R.id.fotocarro);
+        switch (view.getId()){
+            case R.id.fotocarro:
+                Intent galleryIntent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
+                break;
+        }
+        /*
         final CharSequence[] options={"Tomar Foto","Elegir de Galeria","Cancelar"};
         final AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setTitle("Elige una opcion :D");
@@ -124,13 +133,20 @@ public class RgisterCarActivity extends AppCompatActivity {
         });
         builder.show();
 
+        */
+
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        if(requestCode==RESULT_LOAD_IMAGE && resultCode==RESULT_OK && data!=null){
+            Uri selctedImage=data.getData();
+            ImageView fotoCarro=(ImageView)findViewById(R.id.fotocarro);
+            fotoCarro.setImageURI(selctedImage);
+        }
+      /*  switch (requestCode){
             case foto_codigo:
                 if(resultCode==RESULT_OK){
                     String dir=Environment.getExternalStorageDirectory()+File.separator
@@ -145,6 +161,7 @@ public class RgisterCarActivity extends AppCompatActivity {
                 }
 
         }
+       */
     }
 
     private void decodeBitmap(String dir) {
