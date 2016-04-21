@@ -11,8 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Subasta extends AppCompatActivity {
     Button buttonOfertar;
-    TextView textView,et1, et2;
-
+    TextView textView, et2,et3;
     int resultado;
 
     @Override
@@ -37,15 +36,14 @@ public class Subasta extends AppCompatActivity {
     }
 
     public void Suma(){
-        et1 = (TextView) findViewById(R.id.textViewPrecioInicialSubasta);
+        et3 = (TextView) findViewById(R.id.textViewValorAcumulado);
         et2 = (TextView) findViewById(R.id.textViewValorOfertarSubasta);
-        final TextView tvResultado = (TextView) findViewById(R.id.textViewValorAcumulado);
 
-        int aux1 = Integer.valueOf(et1.getText().toString());
+        int aux3 = Integer.valueOf(et3.getText().toString());
         int aux2 = Integer.valueOf(et2.getText().toString());
-        resultado=aux1;
-        resultado = resultado + aux2;
-        tvResultado.setText("" + resultado);
+
+        resultado = aux2 + aux3;
+        et3.setText(String.valueOf(resultado));
 
     }
 
