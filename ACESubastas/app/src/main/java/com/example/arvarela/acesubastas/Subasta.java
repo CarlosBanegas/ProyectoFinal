@@ -23,7 +23,7 @@ public class Subasta extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subasta);
-        consulta(); //Funcion para conlsutar la informacion del auto a subastar
+     //   consulta(); //Funcion para conlsutar la informacion del auto a subastar
         buttonOfertar=(Button) findViewById(R.id.buttonOfertarSubasta);
         textView=(TextView) findViewById(R.id.textViewCronometroSubasta);
         textView.setText("00:00:10");

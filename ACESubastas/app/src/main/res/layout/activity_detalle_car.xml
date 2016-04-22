@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:text="Entrar a la Subasta"
                 android:id="@+id/buttonEntrar"
-                android:onClick="ClickEntrar" />
+                android:onClick="clickEntrar" />
         </LinearLayout>
     </LinearLayout>
 
