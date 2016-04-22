@@ -6,12 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,17 +24,42 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
 public class RgisterCarActivity extends AppCompatActivity {
+
+    private int someVariable;
+
+    public int getSomeVariable() {
+        return someVariable;
+    }
+
+    public void setSomeVariable(int someVariable) {
+        this.someVariable = someVariable;
+    }
+
     private String app_directory="myPictureApp/";
     private String media_directory=app_directory+"media";
     private String temporal_picture_name="temporal.jpg";
@@ -142,6 +170,46 @@ public class RgisterCarActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==RESULT_LOAD_IMAGE && resultCode==RESULT_OK && data!=null){
+
+            //recuperar tamaño dej JSon
+
+            RequestQueue requestQueue;
+            requestQueue= Volley.newRequestQueue(context);
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST, "http://prebasdispositivosmo.comxa.com/ApiApp/vehiculos.php", null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+
+                                JSONArray array = (JSONArray) response.getJSONArray("data");
+                                JSONObject[] objetos = new JSONObject[array.length()];
+
+                                for (int i = 0; i < objetos.length; i++) {
+                                    objetos[i] = (JSONObject) array.get(i);
+
+                                }
+                                int x = objetos.length;
+                                someVariable= x+1;
+                                Toast.makeText(getApplicationContext(), "Id de la imagen: " + someVariable, Toast.LENGTH_SHORT).show();
+                                EditText etFoto = (EditText) findViewById(R.id.etFoto);
+                                etFoto.setText("http://prebasdispositivosmo.comxa.com/pictures/" + someVariable + ".JPG");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //...
+                        }
+                    });
+            requestQueue.add(request);
+
+            //devolve la imagen al imageview
             Uri selctedImage=data.getData();
             ImageView fotoCarro=(ImageView)findViewById(R.id.fotocarro);
             fotoCarro.setImageURI(selctedImage);
@@ -180,7 +248,7 @@ public class RgisterCarActivity extends AppCompatActivity {
 
         Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newfile));
-        startActivityForResult(intent,foto_codigo);
+        startActivityForResult(intent, foto_codigo);
 
     }
 
@@ -230,10 +298,22 @@ public class RgisterCarActivity extends AppCompatActivity {
             final String color = etColor.getText().toString();
             final String ano = etAno.getText().toString();
             final String tipo = etTipo.getText().toString();
-            final String foto = etFoto.getText().toString();
+
             final String descripcion = etDescripcion.getText().toString();
             final float precioInicial = Float.parseFloat(etPrecioInicial.getText().toString());
 
+
+            try{
+                ImageView fotoCarro=(ImageView)findViewById(R.id.fotocarro);
+                Bitmap image=((BitmapDrawable) fotoCarro.getDrawable()).getBitmap();
+                new UploadImage(image, someVariable+"").execute();
+            }catch (Exception e){
+
+            }
+
+            final String foto = etFoto.getText().toString();
+
+            //formulario
 
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
@@ -266,5 +346,54 @@ public class RgisterCarActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(RgisterCarActivity.this);
             queue.add(registerRequest);
         }
+    }
+    private  class UploadImage extends AsyncTask<Void, Void, Void> {
+        Bitmap image;
+        String name;
+        public UploadImage(Bitmap image, String name){
+            this.image=image;
+            this.name=name;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            String encodImage= Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+
+            ArrayList<NameValuePair> dataToSend=new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("image", encodImage));
+            dataToSend.add(new BasicNameValuePair("name", name));
+
+            HttpParams httpRequestParams=getHttpRequestParams();
+
+            HttpClient client=new DefaultHttpClient(httpRequestParams);
+            HttpPost post=new HttpPost("http://prebasdispositivosmo.comxa.com/SavePicture.php");
+            try{
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));
+                client.execute(post);
+            }catch (Exception e){
+
+                e.printStackTrace();
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(getApplicationContext(),"Imagen Guardada", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    private HttpParams getHttpRequestParams(){
+        HttpParams httpRequestParams=new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(httpRequestParams, 1000 * 30);
+        HttpConnectionParams.setSoTimeout(httpRequestParams, 1000*30);
+        return httpRequestParams;
     }
 }
