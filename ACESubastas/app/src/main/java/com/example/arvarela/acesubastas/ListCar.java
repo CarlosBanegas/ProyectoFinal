@@ -2,16 +2,22 @@ package com.example.arvarela.acesubastas;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -22,7 +28,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ListCar extends AppCompatActivity {
+public class ListCar extends AppCompatActivity implements SearchView.OnQueryTextListener{
+
+    SearchView searchView;
+    TextView textView;
+    JsonAdapterActivity ja;
+
 
     private static Context context;
     public static Context getAppContext(){
@@ -33,6 +44,11 @@ public class ListCar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_car);
+
+        searchView = new SearchView(ListCar.this);
+
+
+
 
         this.context = getApplicationContext();
         VolleySingletonActivity vs = VolleySingletonActivity.getInstance();
@@ -48,11 +64,14 @@ public class ListCar extends AppCompatActivity {
                             JSONArray array = (JSONArray) response.getJSONArray("data");
                             JSONObject[] objetos = new JSONObject[array.length()];
 
+
                             for (int i = 0; i < objetos.length; i++) {
                                 objetos[i] = (JSONObject) array.get(i);
                             }
-                            final JsonAdapterActivity ja = new JsonAdapterActivity(getApplicationContext(), R.layout.complex_activity, objetos);
-                            ((ListView) findViewById(R.id.lv)).setAdapter(ja);
+                            ja = new JsonAdapterActivity(getApplicationContext(), R.layout.complex_activity, objetos);
+                            ((ListView)findViewById(R.id.lv)).setAdapter(ja);
+
+
 
                     //Filtro
                     /*        edt=(EditText) findViewById(R.id.editText);
@@ -104,5 +123,25 @@ public class ListCar extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        SearchView searchView=(SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        searchView.setOnQueryTextListener(this);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        ja.getFilter().filter(newText);
+        ((ListView)findViewById(R.id.lv)).setAdapter(ja);
+        return false;
+    }
 }
