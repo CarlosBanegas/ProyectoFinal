@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UserAreaActivity extends AppCompatActivity {
 
@@ -24,10 +25,10 @@ public class UserAreaActivity extends AppCompatActivity {
         EditText etAge = (EditText) findViewById(R.id.etAge);
 
         // Mostrar detalles
-        String message = name + " Binvenido a la pantalla detalle";
+        String message = name + " \nBienvenido a \nACE Subastas";
         tvWelcomeMsg.setText(message);
         etUsername.setText(username);
-        etAge.setText(age + "");
+        etAge.setText(age + " Años");
     }
 
     public void clickRegisterCar(View v){
@@ -37,6 +38,11 @@ public class UserAreaActivity extends AppCompatActivity {
 
     public void clickVerSubastas(View v){
         Intent intent=new Intent(this, ListCar.class);
+        startActivity(intent);
+    }
+
+    public void cerrarSesion(View view){
+        Intent intent=new Intent(this,LoginActivity.class);
         startActivity(intent);
     }
 
