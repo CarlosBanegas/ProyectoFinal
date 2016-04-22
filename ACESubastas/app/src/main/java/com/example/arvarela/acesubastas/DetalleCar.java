@@ -44,8 +44,8 @@ public class DetalleCar extends AppCompatActivity {
         }
     }
 
-    public void Entrar(View v){
-        Intent intent=new Intent(this, Subasta.class);
+    public void ClickEntrar(View v){
+        Intent intent=new Intent(DetalleCar.this, Subasta.class);
         startActivity(intent);
     }
 
