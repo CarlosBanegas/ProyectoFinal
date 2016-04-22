@@ -139,29 +139,7 @@ public class RgisterCarActivity extends AppCompatActivity {
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                 break;
         }
-        /*
-        final CharSequence[] options={"Tomar Foto","Elegir de Galeria","Cancelar"};
-        final AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        builder.setTitle("Elige una opcion :D");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int seleccion) {
-                if (options[seleccion]=="Tomar Foto"){
-                    openCamera();
 
-                }else if (options[seleccion]=="Elegir de Galeria"){
-                    Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/*");
-                    startActivityForResult(intent.createChooser(intent,"Selecciona app de imagen"),selecccionar_foto);
-
-                }else if(options[seleccion]=="Cancelar"){
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-
-        */
 
 
     }
@@ -214,22 +192,7 @@ public class RgisterCarActivity extends AppCompatActivity {
             ImageView fotoCarro=(ImageView)findViewById(R.id.fotocarro);
             fotoCarro.setImageURI(selctedImage);
         }
-      /*  switch (requestCode){
-            case foto_codigo:
-                if(resultCode==RESULT_OK){
-                    String dir=Environment.getExternalStorageDirectory()+File.separator
-                            + media_directory+File.separator+temporal_picture_name;
-                    decodeBitmap(dir);
-                }
-                break;
-            case selecccionar_foto:
-                if(resultCode==RESULT_OK){
-                    Uri path=data.getData();
-                    imageview.setImageURI(path);
-                }
 
-        }
-       */
     }
 
     private void decodeBitmap(String dir) {

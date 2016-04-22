@@ -63,8 +63,6 @@ public class ListCar extends AppCompatActivity implements SearchView.OnQueryText
                         try {
                             JSONArray array = (JSONArray) response.getJSONArray("data");
                             JSONObject[] objetos = new JSONObject[array.length()];
-
-
                             for (int i = 0; i < objetos.length; i++) {
                                 objetos[i] = (JSONObject) array.get(i);
                             }
@@ -139,9 +137,37 @@ public class ListCar extends AppCompatActivity implements SearchView.OnQueryText
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        ja.getFilter().filter(newText);
-        ((ListView)findViewById(R.id.lv)).setAdapter(ja);
+    public boolean onQueryTextChange(final String newText) {
+        VolleySingletonActivity vs = VolleySingletonActivity.getInstance();
+        String url = "http://prebasdispositivosmo.comxa.com/ApiApp/vehiculos.php";
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET,url,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray array = (JSONArray) response.getJSONArray("data");
+                            JSONObject[] objetos = new JSONObject[array.length()];
+                            int q=0;
+                            for (int i = 0; i < objetos.length; i++) {
+                                if (array.getJSONObject(i).getString("marca").contains(newText)){
+                                    objetos[q] = (JSONObject) array.get(i);
+                                    q++; }
+                            }
+                            JSONObject[] objetos2 = new JSONObject[q];
+                            for (int i=0; i<q;i++){
+                                JSONObject temp = null;
+                                objetos2[i]=objetos[i];
+                            }
+                            q=0;
+                            ja = new JsonAdapterActivity(getApplicationContext(), R.layout.complex_activity, objetos2);
+                            ((ListView)findViewById(R.id.lv)).setAdapter(ja);
+                        } catch (JSONException e) {e.printStackTrace();} } }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Todo: deshabilitar cuando lo vayan a subir a Playstore
+                error.printStackTrace();     }
+        });
+        vs.getRequestQueue().add(jor);
         return false;
     }
 }
