@@ -147,19 +147,30 @@ public class ListCar extends AppCompatActivity implements SearchView.OnQueryText
                         try {
                             JSONArray array = (JSONArray) response.getJSONArray("data");
                             JSONObject[] objetos = new JSONObject[array.length()];
-                            int q=0;
-                            for (int i = 0; i < objetos.length; i++) {
-                                if (array.getJSONObject(i).getString("marca").toUpperCase().contains(newText.toUpperCase())){
-                                    objetos[q] = (JSONObject) array.get(i);
-                                    q++; }
+                            if (newText.length()==0){
+                                for (int i = 0; i < objetos.length; i++) {
+                                        objetos[i] = (JSONObject) array.get(i);
+
+                                }
+                                ja = new JsonAdapterActivity(getApplicationContext(), R.layout.complex_activity, objetos);
+                            }else{
+                                int q=0;
+                                for (int i = 0; i < objetos.length; i++) {
+                                    if (array.getJSONObject(i).getString("marca").toUpperCase().contains(newText.toUpperCase())){
+                                        objetos[q] = (JSONObject) array.get(i);
+                                        q++; }
+                                }
+                                JSONObject[] objetos2 = new JSONObject[q];
+                                for (int i=0; i<q;i++){
+                                    JSONObject temp = null;
+                                    objetos2[i]=objetos[i];
+                                }
+                                q=0;
+                                ja = new JsonAdapterActivity(getApplicationContext(), R.layout.complex_activity, objetos2);
                             }
-                            JSONObject[] objetos2 = new JSONObject[q];
-                            for (int i=0; i<q;i++){
-                                JSONObject temp = null;
-                                objetos2[i]=objetos[i];
-                            }
-                            q=0;
-                            ja = new JsonAdapterActivity(getApplicationContext(), R.layout.complex_activity, objetos2);
+
+
+
                             ((ListView)findViewById(R.id.lv)).setAdapter(ja);
                         } catch (JSONException e) {e.printStackTrace();} } }, new Response.ErrorListener() {
             @Override

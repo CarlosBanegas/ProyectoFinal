@@ -44,6 +44,7 @@ public class UserAreaActivity extends AppCompatActivity {
     public void cerrarSesion(View view){
         Intent intent=new Intent(this,LoginActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
 
