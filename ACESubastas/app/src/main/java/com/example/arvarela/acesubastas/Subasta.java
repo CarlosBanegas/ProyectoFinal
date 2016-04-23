@@ -14,6 +14,8 @@ import com.android.volley.toolbox.NetworkImageView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Subasta extends AppCompatActivity {
@@ -25,6 +27,11 @@ public class Subasta extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subasta);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
        consulta(); //Funcion para conlsutar la informacion del auto a subastar
         buttonOfertar=(Button) findViewById(R.id.buttonOfertarSubasta);
         textView=(TextView) findViewById(R.id.textViewCronometroSubasta);
@@ -36,8 +43,14 @@ public class Subasta extends AppCompatActivity {
         buttonOfertar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer.start();
-                Suma();
+                try{
+                    timer.start();
+                    Suma();
+                }catch (Exception e){
+                e.printStackTrace();
+
+            }
+
 
             }
         });

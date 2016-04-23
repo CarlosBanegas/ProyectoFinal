@@ -13,12 +13,19 @@ import com.android.volley.toolbox.NetworkImageView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 public class DetalleCar extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_car);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
         try{
@@ -56,26 +63,33 @@ public class DetalleCar extends AppCompatActivity {
 
 
     public void clickEntrar(View v){
-        TextView titulo = (TextView) findViewById(R.id.tituloTv2);
-        TextView subtitulo = (TextView) findViewById(R.id.subtituloTv2);
-        TextView tvPrecio = (TextView) findViewById(R.id.tvPrecio);
-        TextView tvDetalle = (TextView) findViewById(R.id.tvDetalle);
-        TextView tvColor=(TextView) findViewById(R.id.tvColor);
-        TextView tvAno=(TextView) findViewById(R.id.tvAno);
-        TextView tvTipo=(TextView) findViewById(R.id.tvTipo);
-        NetworkImageView imagen = (NetworkImageView) findViewById(R.id.view2);
-        Bitmap bitmap = ((BitmapDrawable)imagen.getDrawable()).getBitmap();
+        try{
+            TextView titulo = (TextView) findViewById(R.id.tituloTv2);
+            TextView subtitulo = (TextView) findViewById(R.id.subtituloTv2);
+            TextView tvPrecio = (TextView) findViewById(R.id.tvPrecio);
+            TextView tvDetalle = (TextView) findViewById(R.id.tvDetalle);
+            TextView tvColor=(TextView) findViewById(R.id.tvColor);
+            TextView tvAno=(TextView) findViewById(R.id.tvAno);
+            TextView tvTipo=(TextView) findViewById(R.id.tvTipo);
+            NetworkImageView imagen = (NetworkImageView) findViewById(R.id.view2);
+            Bitmap bitmap = ((BitmapDrawable)imagen.getDrawable()).getBitmap();
 
-        Intent intent = new Intent(getApplicationContext(), Subasta.class);
-        intent.putExtra("marca",titulo.getText().toString());
-        intent.putExtra("modelo",subtitulo.getText().toString());
-        intent.putExtra("precioInicial",tvPrecio.getText().toString());
-        intent.putExtra("descripcion",tvDetalle.getText().toString());
-        intent.putExtra("color",tvColor.getText().toString());
-        intent.putExtra("ano",tvAno.getText().toString());
-        intent.putExtra("tipo", tvTipo.getText().toString());
-        intent.putExtra("bitmap",bitmap);
-        startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), Subasta.class);
+            intent.putExtra("marca",titulo.getText().toString());
+            intent.putExtra("modelo",subtitulo.getText().toString());
+            intent.putExtra("precioInicial",tvPrecio.getText().toString());
+            intent.putExtra("descripcion",tvDetalle.getText().toString());
+            intent.putExtra("color",tvColor.getText().toString());
+            intent.putExtra("ano",tvAno.getText().toString());
+            intent.putExtra("tipo", tvTipo.getText().toString());
+            intent.putExtra("bitmap",bitmap);
+            startActivity(intent);
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 
 }

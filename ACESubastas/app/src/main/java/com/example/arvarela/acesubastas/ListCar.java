@@ -46,6 +46,11 @@ public class ListCar extends AppCompatActivity implements SearchView.OnQueryText
         setContentView(R.layout.activity_list_car);
 
         searchView = new SearchView(ListCar.this);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
 
@@ -109,14 +114,20 @@ public class ListCar extends AppCompatActivity implements SearchView.OnQueryText
 
         vs.getRequestQueue().add(jor);
         ListView lv = (ListView) findViewById(R.id.lv);
+        assert lv != null;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                try{
                 parent.getAdapter().getItem(position).toString();
                 String jsonobj = parent.getAdapter().getItem(position).toString();
                 Intent detalle = new Intent(getApplicationContext(),DetalleCar.class);
                 detalle.putExtra("jsonObj", jsonobj);
                 startActivity(detalle);
+            }catch (Exception e){
+                e.printStackTrace();
+
+            }
             }
         });
     }

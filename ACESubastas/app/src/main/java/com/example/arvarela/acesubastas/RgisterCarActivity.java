@@ -75,6 +75,11 @@ public class RgisterCarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rgister_car);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         imageview =(ImageView)findViewById(R.id.fotocarro);
 
@@ -132,6 +137,7 @@ public class RgisterCarActivity extends AppCompatActivity {
     }
 
     public void bfoto(View view){
+    try{
         ImageView fotoCarro=(ImageView)findViewById(R.id.fotocarro);
         switch (view.getId()){
             case R.id.fotocarro:
@@ -139,6 +145,13 @@ public class RgisterCarActivity extends AppCompatActivity {
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                 break;
         }
+
+
+    }catch (Exception e){
+        e.printStackTrace();
+
+    }
+
 
 
 

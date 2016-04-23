@@ -14,6 +14,11 @@ public class UserAreaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
@@ -32,19 +37,38 @@ public class UserAreaActivity extends AppCompatActivity {
     }
 
     public void clickRegisterCar(View v){
-        Intent registerIntent = new Intent(UserAreaActivity.this, RgisterCarActivity.class);
-        UserAreaActivity.this.startActivity(registerIntent);
+        try{
+            Intent registerIntent = new Intent(UserAreaActivity.this, RgisterCarActivity.class);
+            UserAreaActivity.this.startActivity(registerIntent);
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 
     public void clickVerSubastas(View v){
-        Intent intent=new Intent(this, ListCar.class);
-        startActivity(intent);
+        try{
+            Intent intent=new Intent(this, ListCar.class);
+            startActivity(intent);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 
     public void cerrarSesion(View view){
-        Intent intent=new Intent(this,LoginActivity.class);
-        startActivity(intent);
-        this.finish();
+        try{
+            Intent intent=new Intent(this,LoginActivity.class);
+            startActivity(intent);
+            this.finish();
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 
 
