@@ -127,7 +127,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/etFoto"
-                    android:hint="Foto" />
+                    android:hint="Foto"
+                    android:editable="false"
+                    android:enabled="false" />
             </RelativeLayout>
 
         </LinearLayout>

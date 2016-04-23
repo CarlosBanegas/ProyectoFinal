@@ -149,7 +149,7 @@ public class ListCar extends AppCompatActivity implements SearchView.OnQueryText
                             JSONObject[] objetos = new JSONObject[array.length()];
                             int q=0;
                             for (int i = 0; i < objetos.length; i++) {
-                                if (array.getJSONObject(i).getString("marca").contains(newText)){
+                                if (array.getJSONObject(i).getString("marca").toUpperCase().contains(newText.toUpperCase())){
                                     objetos[q] = (JSONObject) array.get(i);
                                     q++; }
                             }
