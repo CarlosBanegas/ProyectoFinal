@@ -9,64 +9,86 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".UserAreaActivity">
 
-    <EditText
-        android:id="@+id/etPassword"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:layout_below="@+id/etUsername"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/bSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesion"
-        android:onClick="clickLogin"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        style="@android:style/Widget.PopupWindow" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="233dp"
+            android:layout_gravity="center_horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Registrarse"
-        android:id="@+id/tvRegisterLink"
-        android:onClick="clickRegistro"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        style="@android:style/Widget.PopupWindow"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentRight="false"
-        android:clickable="false"
-        android:theme="@android:style/Widget.PopupMenu"
-        android:typeface="sans" />
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Usuario"
+                android:elegantTextHeight="true"
+                android:focusable="true"
+                android:layout_below="@+id/imageView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="43dp" />
 
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Usuario"
-        android:elegantTextHeight="true"
-        android:focusable="true"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="43dp" />
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:layout_below="@+id/etUsername"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
-    <ImageView
-        android:layout_width="275dp"
-        android:layout_height="275dp"
-        android:id="@+id/imageView"
-        android:background="@mipmap/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+            <Button
+                android:id="@+id/bSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Iniciar Sesion"
+                android:onClick="clickLogin"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                style="@android:style/Widget.PopupWindow"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Registrarse"
+                android:id="@+id/tvRegisterLink"
+                android:onClick="clickRegistro"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                style="@android:style/Widget.PopupWindow"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="false"
+                android:clickable="false"
+                android:theme="@android:style/Widget.PopupMenu"
+                android:typeface="sans"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:background="@mipmap/logo" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
