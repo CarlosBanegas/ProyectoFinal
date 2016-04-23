@@ -29,11 +29,7 @@ public class Subasta extends AppCompatActivity {
         buttonOfertar=(Button) findViewById(R.id.buttonOfertarSubasta);
         textView=(TextView) findViewById(R.id.textViewCronometroSubasta);
         textView.setText("00:00:10");
-        TextView precio = (TextView) findViewById(R.id.textViewPrecioInicialSubasta);
-        TextView valorAcumulado = (TextView) findViewById(R.id.textViewValorAcumulado);
-        TextView valorOfertar = (TextView) findViewById(R.id.textViewValorOfertar);
-        valorOfertar.setText("100");
-        valorAcumulado.setText(precio.getText());
+
 
 
         final CounterClass timer= new CounterClass(10000,1000);
@@ -92,7 +88,8 @@ public class Subasta extends AppCompatActivity {
             TextView precio = (TextView) findViewById(R.id.textViewPrecioInicialSubasta);
             TextView tipo = (TextView) findViewById(R.id.textViewTipoVehiculoSubasta);
             TextView color = (TextView) findViewById(R.id.textViewColorSubasta);
-
+            TextView valorAcumulado = (TextView) findViewById(R.id.textViewValorAcumulado);
+            TextView valorOfertar = (TextView) findViewById(R.id.textViewValorOfertar);
             NetworkImageView imagen = (NetworkImageView) findViewById(R.id.view2);
 
             Bundle bundle=getIntent().getExtras();
@@ -104,6 +101,8 @@ public class Subasta extends AppCompatActivity {
             precio.setText(bundle.getString("precioInicial"));
             tipo.setText(bundle.getString("tipo"));
             color.setText(bundle.getString("color"));
+            valorOfertar.setText("100");
+            valorAcumulado.setText(bundle.getString("precioInicial"));
 
 
 
