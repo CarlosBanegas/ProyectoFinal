@@ -11,52 +11,65 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="hello world"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Bienvenido a         ACE Subastas"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignRight="@+id/etUsername"
+        android:layout_alignEnd="@+id/etUsername"
+        android:textSize="25dp"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/textViewEtiquetaCantidadOfertar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Nombre de Usuario"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/tvWelcomeMsg"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvWelcomeMsg"
-        android:text="Nombre de Usuario"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="72dp"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textViewEtiquetaCantidadOfertar"
         android:editable="false"
-        android:enabled="false" />
+        android:enabled="false"
+        android:layout_below="@+id/textViewEtiquetaCantidadOfertar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/imageView2"
+        android:layout_toStartOf="@+id/imageView2"
+        android:textSize="20dp"
+        android:textColor="@color/accent_material_light"
+        android:textIsSelectable="false" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Edad"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/etUsername"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/etUsername"
-        android:text="Edad"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="24dp"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/etAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2"
         android:editable="false"
-        android:enabled="false" />
+        android:enabled="false"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="20dp"
+        android:textColor="@color/accent_material_light" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -64,34 +77,51 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/etAge"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout5">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nueva Publicacion"
-            android:id="@+id/bNuevaPublicacion"
-            android:onClick="clickRegisterCar" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ver Subastas"
-            android:id="@+id/bVerSaubastas"
-            android:onClick="clickVerSubastas" />
+        android:id="@+id/linearLayout3">
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="224dp"
-        android:layout_height="207dp"
-        android:id="@+id/imageView4"
-        android:background="@mipmap/logo"
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nueva Publicacion"
+        android:id="@+id/bNuevaPublicacion"
+        android:onClick="clickRegisterCar"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/linearLayout5" />
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver Subastas"
+        android:id="@+id/bVerSaubastas"
+        android:onClick="clickVerSubastas"
+        android:layout_alignTop="@+id/bNuevaPublicacion"
+        android:layout_alignRight="@+id/etAge"
+        android:layout_alignEnd="@+id/etAge" />
+
+    <ImageView
+        android:layout_width="275dp"
+        android:layout_height="275dp"
+        android:id="@+id/imageView2"
+        android:background="@mipmap/logo"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/bVerSaubastas"
+        android:layout_alignStart="@+id/bVerSaubastas"
+        android:layout_alignRight="@+id/etAge"
+        android:layout_alignEnd="@+id/etAge"
+        android:layout_alignBottom="@+id/etUsername" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cerrar Sesion"
+        android:id="@+id/bCerrarSesion"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_alignEnd="@+id/imageView2"
+        android:onClick="cerrarSesion" />
 
 </RelativeLayout>
