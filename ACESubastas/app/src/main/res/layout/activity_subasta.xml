@@ -12,9 +12,10 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.16">
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,18 +24,13 @@
             android:id="@+id/textViewCronometroSubasta"
             android:layout_gravity="center_horizontal" />
 
-        <com.android.volley.toolbox.NetworkImageView
-            android:layout_width="179dp"
-            android:layout_height="153dp"
-            android:id="@+id/view2"
-            android:layout_gravity="center_horizontal" />
-
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="244dp">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.16">
 
         <LinearLayout
             android:orientation="vertical"
@@ -84,8 +80,8 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
                 android:text="Descripcion:"
                 android:id="@+id/textView6"
                 android:textSize="20dp" />
@@ -109,7 +105,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="268dp"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -154,8 +151,8 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
                 android:text="Descripcion"
                 android:id="@+id/textViewDescripcionSubasta"
                 android:textSize="20dp" />
@@ -181,7 +178,7 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.87">
+        android:layout_weight="0.23">
 
         <Button
             android:layout_width="349dp"

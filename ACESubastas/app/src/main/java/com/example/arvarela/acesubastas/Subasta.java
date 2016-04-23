@@ -29,6 +29,12 @@ public class Subasta extends AppCompatActivity {
         buttonOfertar=(Button) findViewById(R.id.buttonOfertarSubasta);
         textView=(TextView) findViewById(R.id.textViewCronometroSubasta);
         textView.setText("00:00:10");
+        TextView precio = (TextView) findViewById(R.id.textViewPrecioInicialSubasta);
+        TextView valorAcumulado = (TextView) findViewById(R.id.textViewValorAcumulado);
+        TextView valorOfertar = (TextView) findViewById(R.id.textViewValorOfertar);
+        valorOfertar.setText("100");
+        valorAcumulado.setText(precio.getText());
+
 
         final CounterClass timer= new CounterClass(10000,1000);
         buttonOfertar.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +48,9 @@ public class Subasta extends AppCompatActivity {
     }
 
     public void Suma(){
+
         et3 = (TextView) findViewById(R.id.textViewValorAcumulado);
-       // et2 = (TextView) findViewById(R.id.textViewValorOfertarSubasta);
+        et2 = (TextView) findViewById(R.id.textViewValorOfertar);
 
         int aux3 = Integer.valueOf(et3.getText().toString());
         int aux2 = Integer.valueOf(et2.getText().toString());
@@ -85,7 +92,7 @@ public class Subasta extends AppCompatActivity {
             TextView precio = (TextView) findViewById(R.id.textViewPrecioInicialSubasta);
             TextView tipo = (TextView) findViewById(R.id.textViewTipoVehiculoSubasta);
             TextView color = (TextView) findViewById(R.id.textViewColorSubasta);
-            //TextView valorAcumulado = (TextView) findViewById(R.id.textViewValorAcumulado);
+
             NetworkImageView imagen = (NetworkImageView) findViewById(R.id.view2);
 
             Bundle bundle=getIntent().getExtras();
@@ -97,6 +104,8 @@ public class Subasta extends AppCompatActivity {
             precio.setText(bundle.getString("precioInicial"));
             tipo.setText(bundle.getString("tipo"));
             color.setText(bundle.getString("color"));
+
+
 
             Intent intent = getIntent();
             Bitmap bitmap = intent.getParcelableExtra("bitmap");
